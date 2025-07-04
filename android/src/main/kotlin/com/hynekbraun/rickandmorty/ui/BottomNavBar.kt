@@ -2,7 +2,6 @@ package com.hynekbraun.rickandmorty.ui
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -16,8 +15,8 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.hynekbraun.rickandmorty.R
 import com.hynekbraun.rickandmorty.components.components.NavBarItemComponent
-import com.hynekbraun.rickandmorty.components.components.NavBarItemComponentModel
 import com.hynekbraun.rickandmorty.components.theme.RMTheme
+import com.hynekbraun.rickandmorty.shared.components.components.NavBarItemComponentModel
 import com.hynekbraun.rickandmorty.shared.navigation.Destinations
 
 @Composable
@@ -37,7 +36,11 @@ internal fun BottomNavBar(
             NavBarItemComponent(
                 modifier = Modifier.weight(1f),
                 model = item.copy(active = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true),
-                onClick = { navController.navigate(item.route) },
+                onClick = {
+                    if (currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == false) {
+                        navController.navigate(item.route)
+                    }
+                },
             )
         }
     }

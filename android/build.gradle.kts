@@ -53,5 +53,6 @@ dependencies {
     implementation(libs.bundles.compose.default)
 
     implementation(projects.shared)
+    implementation(projects.shared.components)
     implementation(projects.android.components)
 }

@@ -1,6 +1,5 @@
 package com.hynekbraun.rickandmorty.components.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Column
@@ -15,14 +14,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.hynekbraun.rickandmorty.components.extensions.clickableWithoutRipple
 import com.hynekbraun.rickandmorty.components.theme.RMTheme
-
-// TODO move to KMP
-public data class NavBarItemComponentModel(
-    val description: String,
-    @DrawableRes val icon: Int,
-    val active: Boolean,
-    val route: Any,
-)
+import com.hynekbraun.rickandmorty.shared.components.components.NavBarItemComponentModel
 
 @Composable
 public fun NavBarItemComponent(
@@ -50,6 +42,5 @@ public fun NavBarItemComponent(
             color = contentColor,
             style = RMTheme.typography.bottomNavigation,
         )
-
     }
 }
