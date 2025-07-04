@@ -10,12 +10,14 @@ androidx-core = "1.16.0"
 androidx-espresso = "3.6.1"
 androidx-lifecycle = "2.9.1"
 androidx-testExt = "1.2.1"
-coil = "3.1.0"
-compose-bom = "2025.05.01"
+coil = "3.2.0"
+compose-bom = "2025.06.01"
 junit = "4.13.2"
 kotlin = "2.2.0"
 jetbrainsKotlinJvm = "2.2.0"
 material = "1.12.0"
+kotlinx-serialization = "1.9.0"
+navigation-compose = "2.9.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
@@ -42,9 +44,11 @@ compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-pr
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 coil-compose = { group = "io.coil-kt.coil3",name = "coil-compose", version.ref = "coil" }
+navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 
 #Shared
 coil-ktor = { group = "io.coil-kt.coil3",name = "coil-network-ktor3", version.ref = "coil" }
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -52,6 +56,7 @@ androidLibrary = { id = "com.android.library", version.ref = "agp" }
 composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 [bundles]
 compose-default = ["compose-ui", "compose-material3", "compose-tooling","compose-tooling-preview"]

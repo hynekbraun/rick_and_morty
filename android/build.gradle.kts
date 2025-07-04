@@ -47,6 +47,7 @@ dependencies {
 
     implementation(libs.androidx.activity.compose)
     implementation(libs.androidx.core.ktx)
+    implementation(libs.navigation.compose)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose.default)
