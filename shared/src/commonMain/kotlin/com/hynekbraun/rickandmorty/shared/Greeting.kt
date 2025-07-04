@@ -1,6 +1,6 @@
-package com.hynekbraun.rm.rickandmorty
+package com.hynekbraun.rickandmorty.shared
 
-class Greeting {
+public class Greeting {
     private val platform = getPlatform()
 
     fun greet(): String {

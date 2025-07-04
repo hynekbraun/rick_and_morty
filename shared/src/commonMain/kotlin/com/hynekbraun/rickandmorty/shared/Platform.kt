@@ -1,4 +1,4 @@
-package com.hynekbraun.rm.rickandmorty
+package com.hynekbraun.rickandmorty.shared
 
 interface Platform {
     val name: String
