@@ -29,4 +29,7 @@ dependencyResolutionManagement {
 }
 
 include(":android")
+include(":android:components")
+
 include(":shared")
+include(":shared:components")

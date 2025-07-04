@@ -52,4 +52,5 @@ dependencies {
     implementation(libs.bundles.compose.default)
 
     implementation(projects.shared)
+    implementation(projects.android.components)
 }
