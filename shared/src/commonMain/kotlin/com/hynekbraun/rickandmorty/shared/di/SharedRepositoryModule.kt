@@ -3,7 +3,7 @@ package com.hynekbraun.rickandmorty.shared.di
 import com.hynekbraun.rickandmorty.shared.repository.CharactersRepository
 import com.hynekbraun.rickandmorty.shared.repository.CharactersRepositoryImpl
 import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApi
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiImpl
+import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApiImpl
 import org.koin.core.module.Module
 import org.koin.dsl.module
 

@@ -12,5 +12,5 @@ public sealed class Destinations {
     }
 
     @Serializable
-    public data object Detail: Destinations()
+    public data class Detail(public val characterId: String): Destinations()
 }

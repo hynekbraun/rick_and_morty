@@ -10,10 +10,14 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.toRoute
 import com.hynekbraun.rickandmorty.screens.characterDetail.CharacterDetailScreen
 import com.hynekbraun.rickandmorty.screens.charactersList.CharactersListScreen
 import com.hynekbraun.rickandmorty.screens.favoritesList.FavoritesListScreen
+import com.hynekbraun.rickandmorty.shared.features.characterdetail.CharacterDetailViewModel
 import com.hynekbraun.rickandmorty.shared.navigation.Destinations
+import org.koin.androidx.compose.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 internal fun NavGraph(
@@ -25,8 +29,8 @@ internal fun NavGraph(
         modifier = modifier,
         navController = navController,
         startDestination = Destinations.Maintab.Characters,
-        enterTransition = { fadeIn(tween(400))  },
-        exitTransition = { fadeOut(tween(400))  },
+        enterTransition = { fadeIn(tween(400)) },
+        exitTransition = { fadeOut(tween(400)) },
     ) {
 
         charactersList(
@@ -54,8 +58,8 @@ private fun NavGraphBuilder.charactersList(
     composable<Destinations.Maintab.Characters> { backStackEntry ->
         onBottomBarVisibilityChange(true)
         CharactersListScreen(
-            navigateToDetail = {
-                navController.navigate(Destinations.Detail)
+            navigateToDetail = { id ->
+                navController.navigate(Destinations.Detail(id))
             }
         )
     }
@@ -76,7 +80,12 @@ private fun NavGraphBuilder.characterDetail(
     onBottomBarVisibilityChange: (Boolean) -> Unit = {},
 ) {
     composable<Destinations.Detail> { backStackEntry ->
+
+        val destination: Destinations.Detail = backStackEntry.toRoute()
+        val viewModel = koinViewModel<CharacterDetailViewModel>(
+            parameters = { parametersOf(destination.characterId) }
+        )
         onBottomBarVisibilityChange(false)
-        CharacterDetailScreen()
+        CharacterDetailScreen(viewModel)
     }
 }
