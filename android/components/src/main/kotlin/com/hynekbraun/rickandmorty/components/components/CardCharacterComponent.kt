@@ -2,6 +2,7 @@ package com.hynekbraun.rickandmorty.components.components
 
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,6 +14,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,16 +30,20 @@ import com.hynekbraun.rickandmorty.shared.components.components.CardCharacterCom
 @Composable
 public fun CardCharacterComponent(
     model: CardCharacterComponentModel,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier,
+        modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
+            .clickable(onClick = remember { { onClick(model.id) } }),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = RMTheme.colors.backgroundsTertiary),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
     ) {
         Row(
-            modifier = Modifier.padding(8.dp),
+            modifier = Modifier
+                .padding(8.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.Top,
         ) {
@@ -99,7 +105,8 @@ private fun CardCharacterComponentPreview() = RMTheme {
                 status = "Alive",
                 showStar = true,
                 id = "5",
-            )
+            ),
+            onClick = {},
         )
         CardCharacterComponent(
             modifier = Modifier.fillMaxWidth(),
@@ -109,7 +116,8 @@ private fun CardCharacterComponentPreview() = RMTheme {
                 status = "Alive",
                 showStar = true,
                 id = "5",
-            )
+            ),
+            onClick = {},
         )
     }
 }

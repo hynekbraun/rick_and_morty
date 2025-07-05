@@ -1,0 +1,18 @@
+package com.hynekbraun.rickandmorty.shared.repository
+
+import com.hynekbraun.rickandmorty.shared.network.Response
+import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApi
+import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
+import com.hynekbraun.rickandmorty.shared.repository.api.models.toDomainModel
+import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
+
+internal class CharactersRepositoryImpl(
+    private val api: CharactersApi,
+) : CharactersRepository {
+    override suspend fun getCharacters(): Response<List<CharacterModel>> {
+        return when (val response = api.getCharacters()) {
+            is Response.Error<CharactersApiModel> -> return Response.Error(response.message)
+            is Response.Success<CharactersApiModel> -> Response.Success(response.data.characters.map { it.toDomainModel() })
+        }
+    }
+}

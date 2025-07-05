@@ -1,5 +1,8 @@
 package com.hynekbraun.rickandmorty.ui
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.NavigationBar
 import androidx.compose.runtime.Composable
@@ -27,14 +30,14 @@ internal fun BottomNavBar(
     NavigationBar(
         modifier = modifier.clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)),
         tonalElevation = 2.dp,
-        containerColor = RMTheme.colors.backgroundsSecondary
     ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
         val currentDestination: NavDestination? = navBackStackEntry?.destination
 
+        Spacer(Modifier.weight(0.5f))
         navBarItems().forEachIndexed { index, item ->
             NavBarItemComponent(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier.weight(1f).widthIn(max = 120.dp),
                 model = item.copy(active = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true),
                 onClick = {
                     if (currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == false) {
@@ -43,6 +46,7 @@ internal fun BottomNavBar(
                 },
             )
         }
+        Spacer(Modifier.weight(0.5f))
     }
 }
 

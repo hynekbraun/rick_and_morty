@@ -24,6 +24,7 @@ internal fun App() {
         var bottomBarVisibility by remember { mutableStateOf(true) }
 
         Scaffold(
+            containerColor = RMTheme.colors.backgroundsPrimary,
             modifier = Modifier.fillMaxSize(),
             bottomBar = {
                 AnimatedVisibility(

@@ -21,15 +21,34 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            export(libs.androidx.lifecycle.viewmodel)
         }
     }
 
     sourceSets {
         commonMain.dependencies {
             implementation(libs.kotlinx.serialization.json)
+            implementation(libs.koin.core)
+            implementation(libs.androidx.lifecycle.viewmodel)
+
+            implementation(libs.bundles.ktor.core)
+
+            implementation(projects.shared.components)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+        }
+
+        androidMain.dependencies {
+            implementation(libs.koin.android)
+            implementation(libs.koin.core)
+            implementation(libs.ktor.client.okhttp)
+        }
+
+        iosMain.dependencies {
+            implementation(libs.koin.core)
+            implementation(libs.ktor.client.darwin)
+            api(libs.androidx.lifecycle.viewmodel)
         }
     }
     explicitApi()
