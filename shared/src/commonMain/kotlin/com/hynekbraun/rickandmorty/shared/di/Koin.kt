@@ -11,7 +11,7 @@ public fun initKoin(
 
     ) {
     startKoin {
-        appDeclaration
+        appDeclaration()
         modules(platformModules + sharedModules)
     }
 }

@@ -9,5 +9,5 @@ import org.koin.dsl.module
 
 internal val sharedFeatureModule: Module = module {
     factory<CharactersListComponentsFactory> { CharactersListComponentsFactoryImpl() }
-    factory<CharacterDetailComponentsFactory> { CharacterDetailComponentsFactoryImpl() }
+    factory<CharacterDetailComponentsFactory> { CharacterDetailComponentsFactoryImpl(get()) }
 }

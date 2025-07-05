@@ -3,47 +3,52 @@ package com.hynekbraun.rickandmorty.shared.features.characterdetail
 import com.hynekbraun.rickandmorty.shared.components.components.DetailHeaderComponentModel
 import com.hynekbraun.rickandmorty.shared.components.components.InformationComponentModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
+import com.hynekbraun.rickandmorty.shared.resources.StringRes
 
 public interface CharacterDetailComponentsFactory {
 
     public fun create(model: CharacterDetailModel): CharacterDetailViewState.Data
 }
-// TODO add trans from platform
-internal class CharacterDetailComponentsFactoryImpl() : CharacterDetailComponentsFactory {
+
+internal class CharacterDetailComponentsFactoryImpl(
+    private val stringRes: StringRes,
+) : CharacterDetailComponentsFactory {
     override fun create(model: CharacterDetailModel): CharacterDetailViewState.Data {
         return CharacterDetailViewState.Data(
             header = DetailHeaderComponentModel(
-                name = "Name",
-                title = model.status,
+                name = model.name,
+                title = stringRes.name,
                 imageUrl = model.photoUrl,
             ),
             info = listOf(
                 InformationComponentModel(
-                    title = "Status",
-                    value = model.status,
+                    title = stringRes.status,
+                    value = model.status.placeholderIfEmpty(),
                 ),
                 InformationComponentModel(
-                    title = "Species",
-                    value = model.species,
+                    title = stringRes.species,
+                    value = model.species.placeholderIfEmpty(),
                 ),
                 InformationComponentModel(
-                    title = "Type",
-                    value = model.type,
+                    title = stringRes.type,
+                    value = model.type.placeholderIfEmpty(),
                 ),
                 InformationComponentModel(
-                    title = "Gender",
-                    value = model.gender,
+                    title = stringRes.gender,
+                    value = model.gender.placeholderIfEmpty(),
                 ),
                 InformationComponentModel(
-                    title = "Origin",
-                    value = model.origin,
+                    title = stringRes.origin,
+                    value = model.origin.placeholderIfEmpty(),
                 ),
                 InformationComponentModel(
-                    title = "Location",
-                    value = model.location,
+                    title = stringRes.location,
+                    value = model.location.placeholderIfEmpty(),
                 ),
             )
         )
     }
-
 }
+
+private fun String.placeholderIfEmpty() =
+    this.takeIf { it.isNotEmpty() } ?: "-"
