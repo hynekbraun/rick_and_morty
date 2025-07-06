@@ -17,7 +17,7 @@ internal class CharactersListComponentsFactoryImpl() : CharactersListComponentsF
                 name = character.name,
                 id = character.id,
                 status = character.status,
-                showStar = false, // TODO favorites
+                showStar = character.isFavorite,
             )
         }
 

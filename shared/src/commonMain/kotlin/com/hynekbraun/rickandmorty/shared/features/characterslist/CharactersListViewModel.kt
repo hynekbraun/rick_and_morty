@@ -8,6 +8,7 @@ import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
@@ -28,12 +29,13 @@ public class CharactersListViewModel(
 
     private fun getCharacters() {
         viewModelScope.launch {
-            val characters = repository.getCharacters()
-            val newState = characters.toState(componentFactory)
-            (characters as? Response.Success<CharactersListModel>)?.let {
-                nextPage = it.data.nextPage
+            repository.getCharacters().collectLatest {
+                val newState = it.toState(componentFactory)
+                (it as? Response.Success<CharactersListModel>)?.let {
+                    nextPage = it.data.nextPage
+                }
+                _state.emit(newState)
             }
-            _state.emit(newState)
         }
     }
 

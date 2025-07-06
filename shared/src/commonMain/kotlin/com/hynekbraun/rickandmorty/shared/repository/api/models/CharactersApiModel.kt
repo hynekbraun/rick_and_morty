@@ -31,7 +31,7 @@ internal data class CharactersApiModel(
     )
 }
 
-internal fun CharactersApiModel.toDomainModel(): CharactersListModel = CharactersListModel(
+internal fun CharactersApiModel.toDomainModel(favoritesId: List<String>): CharactersListModel = CharactersListModel(
     nextPage = this.info.nextPage,
     characters = this.characters.map { character ->
         CharacterModel(
@@ -39,6 +39,7 @@ internal fun CharactersApiModel.toDomainModel(): CharactersListModel = Character
             name = character.name,
             status = character.status,
             photoUrl = character.photoUrl,
+            isFavorite = favoritesId.contains(character.id),
         )
     },
 )

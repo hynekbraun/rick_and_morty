@@ -11,7 +11,8 @@ internal actual val viewModelModule: Module = module {
     viewModelOf(::CharactersListViewModel)
     viewModel { (characterId: String) ->
         CharacterDetailViewModel(
-            repository = get(),
+            charactersRepository = get(),
+            favoritesRepository = get(),
             characterId = characterId,
             componentFactory = get(),
             drawableResources = get(),

@@ -25,7 +25,7 @@ internal fun CharacterDetailScreen(
         ActionBarComponent(
             model = actionBarState,
             onLeadingIconClick = navigateBack,
-            onTrailingIconClick = {} // TODO toggle favorites
+            onTrailingIconClick = viewModel::toggleFavorite
         )
         when (viewState) {
             is CharacterDetailViewState.Data -> CharacterDetailDataScreen(

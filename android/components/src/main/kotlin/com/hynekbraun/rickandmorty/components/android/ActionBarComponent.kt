@@ -1,5 +1,6 @@
 package com.hynekbraun.rickandmorty.components.android
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -9,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,7 +46,9 @@ public fun ActionBarComponent(
         ) {
             model.leadingIcon?.let {
                 Icon(
-                    modifier = Modifier.clickableWithoutRipple {
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickableWithoutRipple {
                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                         onLeadingIconClick?.invoke()
                     },
@@ -63,8 +67,10 @@ public fun ActionBarComponent(
                 )
             } ?: Spacer(modifier = Modifier.weight(weight = 1f))
             model.trailingIcon?.let {
-                Icon(
-                    modifier = Modifier.clickableWithoutRipple {
+                Image(
+                    modifier = Modifier
+                        .size(24.dp)
+                        .clickableWithoutRipple {
                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                         onTrailingIconClick?.invoke()
                     },
