@@ -6,11 +6,16 @@ public sealed class Destinations {
 
     public sealed class Maintab : Destinations() {
         @Serializable
-        public data object Characters: Maintab()
+        public data object Characters : Maintab()
+
         @Serializable
-        public data object Favorites: Maintab()
+        public data object Favorites : Maintab()
     }
 
     @Serializable
-    public data class Detail(public val characterId: String): Destinations()
+    public data class Detail(public val characterId: String) : Destinations()
+
+    @Serializable
+    public data object Search : Destinations()
+
 }

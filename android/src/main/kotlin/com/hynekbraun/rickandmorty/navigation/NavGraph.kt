@@ -4,6 +4,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -14,6 +15,7 @@ import androidx.navigation.toRoute
 import com.hynekbraun.rickandmorty.screens.characterDetail.CharacterDetailScreen
 import com.hynekbraun.rickandmorty.screens.charactersList.CharactersListScreen
 import com.hynekbraun.rickandmorty.screens.favoritesList.FavoritesListScreen
+import com.hynekbraun.rickandmorty.screens.search.SearchScreen
 import com.hynekbraun.rickandmorty.shared.features.characterdetail.CharacterDetailViewModel
 import com.hynekbraun.rickandmorty.shared.navigation.Destinations
 import org.koin.androidx.compose.koinViewModel
@@ -47,6 +49,11 @@ internal fun NavGraph(
             navController = navController,
             onBottomBarVisibilityChange = onBottomBarVisibilityChange
         )
+
+        search(
+            navController = navController,
+            onBottomBarVisibilityChange = onBottomBarVisibilityChange
+        )
     }
 
 }
@@ -60,7 +67,8 @@ private fun NavGraphBuilder.charactersList(
         CharactersListScreen(
             navigateToDetail = { id ->
                 navController.navigate(Destinations.Detail(id))
-            }
+            },
+            navigateToSearch = remember { { navController.navigate(Destinations.Search) } }
         )
     }
 }
@@ -75,6 +83,16 @@ private fun NavGraphBuilder.favoritesList(
     }
 }
 
+private fun NavGraphBuilder.search(
+    navController: NavController,
+    onBottomBarVisibilityChange: (Boolean) -> Unit = {},
+) {
+    composable<Destinations.Search> { backStackEntry ->
+        onBottomBarVisibilityChange(false)
+        SearchScreen()
+    }
+}
+
 private fun NavGraphBuilder.characterDetail(
     navController: NavController,
     onBottomBarVisibilityChange: (Boolean) -> Unit = {},
@@ -86,6 +104,6 @@ private fun NavGraphBuilder.characterDetail(
             parameters = { parametersOf(destination.characterId) }
         )
         onBottomBarVisibilityChange(false)
-        CharacterDetailScreen(viewModel)
+        CharacterDetailScreen(viewModel, navigateBack = remember { { navController.popBackStack() } })
     }
 }

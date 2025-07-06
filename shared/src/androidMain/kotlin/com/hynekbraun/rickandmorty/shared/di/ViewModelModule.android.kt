@@ -14,6 +14,7 @@ internal actual val viewModelModule: Module = module {
             repository = get(),
             characterId = characterId,
             componentFactory = get(),
+            drawableResources = get(),
         )
     }
 }

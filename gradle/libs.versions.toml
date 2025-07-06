@@ -46,6 +46,7 @@ compose-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+compose-material-icons = { group = "androidx.compose.material", name = "material-icons-extended" }
 coil-compose = { group = "io.coil-kt.coil3",name = "coil-compose", version.ref = "coil" }
 navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose" }
 koin_compose = { group = "io.insert-koin", name = "koin-androidx-compose", version.ref = "koin" }
