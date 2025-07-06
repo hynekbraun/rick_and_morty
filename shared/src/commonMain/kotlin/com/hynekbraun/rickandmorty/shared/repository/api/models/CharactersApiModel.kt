@@ -1,6 +1,7 @@
 package com.hynekbraun.rickandmorty.shared.repository.api.models
 
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
+import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
@@ -14,7 +15,7 @@ internal data class CharactersApiModel(
     @Serializable
     internal data class Info(
         @SerialName("next")
-        val nextPage: String,
+        val nextPage: String?,
     )
 
     @Serializable
@@ -30,9 +31,14 @@ internal data class CharactersApiModel(
     )
 }
 
-internal fun CharactersApiModel.Results.toDomainModel(): CharacterModel = CharacterModel(
-    id = this.id,
-    name = this.name,
-    status = this.status,
-    photoUrl = this.photoUrl,
+internal fun CharactersApiModel.toDomainModel(): CharactersListModel = CharactersListModel(
+    nextPage = this.info.nextPage,
+    characters = this.characters.map { character ->
+        CharacterModel(
+            id = character.id,
+            name = character.name,
+            status = character.status,
+            photoUrl = character.photoUrl,
+        )
+    },
 )

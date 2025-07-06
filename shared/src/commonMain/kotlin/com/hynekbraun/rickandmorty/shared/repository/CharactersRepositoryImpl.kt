@@ -6,15 +6,22 @@ import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailA
 import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
 import com.hynekbraun.rickandmorty.shared.repository.api.models.toDomainModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
-import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
+import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel
 
 internal class CharactersRepositoryImpl(
     private val api: CharactersApi,
 ) : CharactersRepository {
-    override suspend fun getCharacters(): Response<List<CharacterModel>> {
+    override suspend fun getCharacters(): Response<CharactersListModel> {
         return when (val response = api.getCharacters()) {
             is Response.Error<CharactersApiModel> -> return Response.Error(response.message)
-            is Response.Success<CharactersApiModel> -> Response.Success(response.data.characters.map { it.toDomainModel() })
+            is Response.Success<CharactersApiModel> -> Response.Success(response.data.toDomainModel() )
+        }
+    }
+
+    override suspend fun getCharactersByPage(page: String): Response<CharactersListModel> {
+        return when (val response = api.getCharactersByPage(page)) {
+            is Response.Error<CharactersApiModel> -> return Response.Error(response.message)
+            is Response.Success<CharactersApiModel> -> Response.Success(response.data.toDomainModel() )
         }
     }
 

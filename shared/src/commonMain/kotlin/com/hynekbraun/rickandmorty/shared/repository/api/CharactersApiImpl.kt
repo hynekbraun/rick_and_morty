@@ -12,6 +12,9 @@ internal class CharactersApiImpl(
     override suspend fun getCharacters(): Response<CharactersApiModel> =
         networkExecutor.get<CharactersApiModel>(CHARACTERS_URL)
 
+    override suspend fun getCharactersByPage(url: String): Response<CharactersApiModel> =
+        networkExecutor.get<CharactersApiModel>(url)
+
     override suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel> =
         networkExecutor.get<CharacterDetailApiModel>("$BASE_URL$DELIMITER$id")
 }

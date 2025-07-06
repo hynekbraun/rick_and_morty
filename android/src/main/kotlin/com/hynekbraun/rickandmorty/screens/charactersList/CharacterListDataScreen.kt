@@ -11,12 +11,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.hynekbraun.rickandmorty.components.components.CardCharacterComponent
+import com.hynekbraun.rickandmorty.components.components.NextPageComponent
 import com.hynekbraun.rickandmorty.shared.features.characterslist.CharactersListViewState
 
 @Composable
 internal fun CharacterListDataScreen(
     data: CharactersListViewState.Data,
     onCharacterClick: (String) -> Unit,
+    loadNextPage: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
 
@@ -27,12 +29,18 @@ internal fun CharacterListDataScreen(
         item() {
             Spacer(modifier = Modifier.height(2.dp))
         }
-        items(items = data.data, key = { it.id }) {
+        items(items = data.characters, key = { it.id }) {
             CardCharacterComponent(
                 modifier = Modifier.fillMaxWidth(),
                 model = it,
                 onClick = onCharacterClick,
-                )
+            )
+        }
+        data.nextPage?.let {
+            item {
+                NextPageComponent(Modifier.fillMaxWidth())
+                loadNextPage()
+            }
         }
     }
 }

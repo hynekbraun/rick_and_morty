@@ -38,6 +38,7 @@ internal fun CharactersListScreen(
             is CharactersListViewState.Data -> CharacterListDataScreen(
                 data = viewState as CharactersListViewState.Data,
                 onCharacterClick = navigateToDetail,
+                loadNextPage = viewModel::getNextPage,
             )
 
             CharactersListViewState.Error -> ErrorScreen()

@@ -8,5 +8,7 @@ internal interface CharactersApi {
 
     suspend fun getCharacters(): Response<CharactersApiModel>
 
+    suspend fun getCharactersByPage(url: String): Response<CharactersApiModel>
+
     suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel>
 }
