@@ -8,6 +8,8 @@ internal interface CharactersApi {
 
     suspend fun getCharacters(): Response<CharactersApiModel>
 
+    suspend fun getCharactersByIds(ids: List<String>): Response<List<CharactersApiModel.Results>>
+
     suspend fun getCharactersByPage(url: String): Response<CharactersApiModel>
 
     suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel>

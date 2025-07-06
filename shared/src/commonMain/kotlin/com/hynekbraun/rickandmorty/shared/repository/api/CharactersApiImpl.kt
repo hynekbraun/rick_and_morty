@@ -3,6 +3,7 @@ package com.hynekbraun.rickandmorty.shared.repository.api
 import com.hynekbraun.rickandmorty.shared.network.NetworkExecutor
 import com.hynekbraun.rickandmorty.shared.network.Response
 import com.hynekbraun.rickandmorty.shared.network.get
+import com.hynekbraun.rickandmorty.shared.network.getList
 import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailApiModel
 import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
 
@@ -11,6 +12,10 @@ internal class CharactersApiImpl(
 ) : CharactersApi {
     override suspend fun getCharacters(): Response<CharactersApiModel> =
         networkExecutor.get<CharactersApiModel>(CHARACTERS_URL)
+
+    override suspend fun getCharactersByIds(ids: List<String>): Response<List<CharactersApiModel.Results>> {
+        return networkExecutor.getList<CharactersApiModel.Results>("$BASE_URL$DELIMITER${ids.joinToString()}")
+    }
 
     override suspend fun getCharactersByPage(url: String): Response<CharactersApiModel> =
         networkExecutor.get<CharactersApiModel>(url)

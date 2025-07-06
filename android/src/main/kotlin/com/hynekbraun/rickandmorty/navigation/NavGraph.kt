@@ -11,6 +11,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import androidx.navigation.toRoute
 import com.hynekbraun.rickandmorty.screens.characterDetail.CharacterDetailScreen
 import com.hynekbraun.rickandmorty.screens.charactersList.CharactersListScreen
@@ -35,25 +36,39 @@ internal fun NavGraph(
         exitTransition = { fadeOut(tween(400)) },
     ) {
 
-        charactersList(
-            navController = navController,
-            onBottomBarVisibilityChange = onBottomBarVisibilityChange
-        )
+        navigation<Destinations.Maintab.Characters>(
+            startDestination = Destinations.Characters
+        ) {
 
-        favoritesList(
-            navController = navController,
-            onBottomBarVisibilityChange = onBottomBarVisibilityChange
-        )
+            charactersList(
+                navController = navController,
+                onBottomBarVisibilityChange = onBottomBarVisibilityChange
+            )
 
-        characterDetail(
-            navController = navController,
-            onBottomBarVisibilityChange = onBottomBarVisibilityChange
-        )
+            characterDetail(
+                navController = navController,
+                onBottomBarVisibilityChange = onBottomBarVisibilityChange
+            )
 
-        search(
-            navController = navController,
-            onBottomBarVisibilityChange = onBottomBarVisibilityChange
-        )
+            search(
+                navController = navController,
+                onBottomBarVisibilityChange = onBottomBarVisibilityChange
+            )
+        }
+
+        navigation<Destinations.Maintab.Favorites>(
+            startDestination = Destinations.Favorites,
+        ) {
+            favoritesList(
+                navController = navController,
+                onBottomBarVisibilityChange = onBottomBarVisibilityChange
+            )
+
+            characterDetail(
+                navController = navController,
+                onBottomBarVisibilityChange = onBottomBarVisibilityChange
+            )
+        }
     }
 
 }
@@ -62,7 +77,7 @@ private fun NavGraphBuilder.charactersList(
     navController: NavController,
     onBottomBarVisibilityChange: (Boolean) -> Unit = {},
 ) {
-    composable<Destinations.Maintab.Characters> { backStackEntry ->
+    composable<Destinations.Characters> { backStackEntry ->
         onBottomBarVisibilityChange(true)
         CharactersListScreen(
             navigateToDetail = { id ->
@@ -77,9 +92,13 @@ private fun NavGraphBuilder.favoritesList(
     navController: NavController,
     onBottomBarVisibilityChange: (Boolean) -> Unit = {},
 ) {
-    composable<Destinations.Maintab.Favorites> { backStackEntry ->
+    composable<Destinations.Favorites> { backStackEntry ->
         onBottomBarVisibilityChange(true)
-        FavoritesListScreen()
+        FavoritesListScreen(
+            navigateToDetail = { id ->
+                navController.navigate(Destinations.Detail(id))
+            },
+        )
     }
 }
 

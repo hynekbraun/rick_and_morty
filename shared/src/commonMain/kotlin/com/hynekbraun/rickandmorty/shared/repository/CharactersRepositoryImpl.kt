@@ -7,8 +7,10 @@ import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailA
 import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
 import com.hynekbraun.rickandmorty.shared.repository.api.models.toDomainModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
+import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
@@ -21,6 +23,19 @@ internal class CharactersRepositoryImpl(
             when (val response = api.getCharacters()) {
                 is Response.Error<CharactersApiModel> -> Response.Error(response.message)
                 is Response.Success<CharactersApiModel> -> Response.Success(response.data.toDomainModel(favorites.map { it.id }))
+            }
+        }
+
+    override suspend fun getFavoriteCharacters(): Flow<Response<List<CharacterModel>>> =
+        favoritesDao.getAll().map { favorites ->
+            when (val response = api.getCharactersByIds(favorites.map { it.id })) {
+                is Response.Error<List<CharactersApiModel.Results>> -> Response.Error(response.message)
+                is Response.Success<List<CharactersApiModel.Results>> -> {
+                    Response.Success(
+                        response.data.toDomainModel(
+                            favorites.map { it.id })
+                    )
+                }
             }
         }
 

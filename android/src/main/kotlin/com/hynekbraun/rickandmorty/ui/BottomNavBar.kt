@@ -1,6 +1,5 @@
 package com.hynekbraun.rickandmorty.ui
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,10 +14,10 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.hynekbraun.rickandmorty.R
 import com.hynekbraun.rickandmorty.components.components.NavBarItemComponent
-import com.hynekbraun.rickandmorty.components.theme.RMTheme
 import com.hynekbraun.rickandmorty.shared.components.components.NavBarItemComponentModel
 import com.hynekbraun.rickandmorty.shared.navigation.Destinations
 
@@ -37,11 +36,19 @@ internal fun BottomNavBar(
         Spacer(Modifier.weight(0.5f))
         navBarItems().forEachIndexed { index, item ->
             NavBarItemComponent(
-                modifier = Modifier.weight(1f).widthIn(max = 120.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .widthIn(max = 120.dp),
                 model = item.copy(active = currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == true),
                 onClick = {
                     if (currentDestination?.hierarchy?.any { it.hasRoute(item.route::class) } == false) {
-                        navController.navigate(item.route)
+                        navController.navigate(item.route) {
+                            launchSingleTop = true
+                            restoreState = true
+                            popUpTo(navController.graph.findStartDestination().id) {
+                                saveState = true
+                            }
+                        }
                     }
                 },
             )

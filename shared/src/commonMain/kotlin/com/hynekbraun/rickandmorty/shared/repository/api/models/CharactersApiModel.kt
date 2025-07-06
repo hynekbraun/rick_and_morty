@@ -21,7 +21,7 @@ internal data class CharactersApiModel(
     @Serializable
     internal data class Results(
         @SerialName("id")
-        val id: String,
+        val id: Int,
         @SerialName("name")
         val name: String,
         @SerialName("status")
@@ -35,11 +35,21 @@ internal fun CharactersApiModel.toDomainModel(favoritesId: List<String>): Charac
     nextPage = this.info.nextPage,
     characters = this.characters.map { character ->
         CharacterModel(
-            id = character.id,
+            id = character.id.toString(),
             name = character.name,
             status = character.status,
             photoUrl = character.photoUrl,
-            isFavorite = favoritesId.contains(character.id),
+            isFavorite = favoritesId.contains(character.id.toString()),
         )
     },
 )
+
+internal  fun List<CharactersApiModel.Results>.toDomainModel(favoritesId: List<String>): List<CharacterModel> = this.map {
+    CharacterModel(
+        id = it.id.toString(),
+        name = it.name,
+        status = it.status,
+        photoUrl = it.photoUrl,
+        isFavorite = favoritesId.contains(it.id.toString()),
+    )
+}

@@ -13,6 +13,12 @@ public sealed class Destinations {
     }
 
     @Serializable
+    public data object Characters : Destinations()
+
+    @Serializable
+    public data object Favorites : Maintab()
+
+    @Serializable
     public data class Detail(public val characterId: String) : Destinations()
 
     @Serializable
