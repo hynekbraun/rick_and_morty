@@ -1,8 +1,8 @@
-package com.hynekbraun.rickandmorty.shared.repository.api
+package com.hynekbraun.rickandmorty.shared.api
 
 import com.hynekbraun.rickandmorty.shared.network.Response
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailApiModel
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.CharacterDetailApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.CharactersApiModel
 
 internal interface CharactersApi {
 

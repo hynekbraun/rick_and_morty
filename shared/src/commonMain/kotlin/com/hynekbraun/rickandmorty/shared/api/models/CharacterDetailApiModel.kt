@@ -1,4 +1,4 @@
-package com.hynekbraun.rickandmorty.shared.repository.api.models
+package com.hynekbraun.rickandmorty.shared.api.models
 
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
 import kotlinx.serialization.SerialName

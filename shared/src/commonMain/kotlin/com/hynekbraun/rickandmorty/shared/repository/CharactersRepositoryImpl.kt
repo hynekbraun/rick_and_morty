@@ -2,10 +2,10 @@ package com.hynekbraun.rickandmorty.shared.repository
 
 import com.hynekbraun.rickandmorty.shared.database.FavoriteCharactersDao
 import com.hynekbraun.rickandmorty.shared.network.Response
-import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApi
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailApiModel
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
-import com.hynekbraun.rickandmorty.shared.repository.api.models.toDomainModel
+import com.hynekbraun.rickandmorty.shared.api.CharactersApi
+import com.hynekbraun.rickandmorty.shared.api.models.CharacterDetailApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.CharactersApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.toDomainModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel

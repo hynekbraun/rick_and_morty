@@ -1,11 +1,11 @@
-package com.hynekbraun.rickandmorty.shared.repository.api
+package com.hynekbraun.rickandmorty.shared.api
 
 import com.hynekbraun.rickandmorty.shared.network.NetworkExecutor
 import com.hynekbraun.rickandmorty.shared.network.Response
 import com.hynekbraun.rickandmorty.shared.network.get
 import com.hynekbraun.rickandmorty.shared.network.getList
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharacterDetailApiModel
-import com.hynekbraun.rickandmorty.shared.repository.api.models.CharactersApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.CharacterDetailApiModel
+import com.hynekbraun.rickandmorty.shared.api.models.CharactersApiModel
 
 internal class CharactersApiImpl(
     private val networkExecutor: NetworkExecutor,
@@ -21,15 +21,17 @@ internal class CharactersApiImpl(
         networkExecutor.get<CharactersApiModel>(url)
 
     override suspend fun getCharactersByPageAndQuery(url: String?, query: String): Response<CharactersApiModel> {
-        val safeUrl = if (url == null) "$CHARACTERS_URL$NAME_FILTER$query" else "$CHARACTERS_URL$NAME_FILTER$query"
+        val safeUrl = if (url == null) "$CHARACTERS_URL$NAME_FILTER$query" else "$url$NAME_FILTER$query"
         return networkExecutor.get<CharactersApiModel>(safeUrl)
     }
 
     override suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel> =
         networkExecutor.get<CharacterDetailApiModel>("$BASE_URL$DELIMITER$id")
-}
 
-private const val DELIMITER: String = "/"
-private const val BASE_URL: String = "https://rickandmortyapi.com/api/character"
-private const val CHARACTERS_URL: String = "$BASE_URL?page=1"
-private const val NAME_FILTER: String = "&name="
+    companion object {
+        internal const val DELIMITER: String = "/"
+        internal const val BASE_URL: String = "https://rickandmortyapi.com/api/character"
+        internal const val CHARACTERS_URL: String = "$BASE_URL?page=1"
+        internal const val NAME_FILTER: String = "&name="
+    }
+}

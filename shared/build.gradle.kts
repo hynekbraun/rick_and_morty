@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlinSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.room.plugin)
+    alias(libs.plugins.testing.mokkery)
 }
 
 kotlin {
@@ -42,7 +43,9 @@ kotlin {
             implementation(projects.shared.components)
         }
         commonTest.dependencies {
-            implementation(libs.kotlin.test)
+            implementation(libs.testing.kotlin)
+            implementation(libs.testing.kotlin.coroutines)
+            implementation(libs.testing.turbine)
         }
 
         androidMain.dependencies {

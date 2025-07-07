@@ -4,8 +4,8 @@ import com.hynekbraun.rickandmorty.shared.repository.CharactersRepository
 import com.hynekbraun.rickandmorty.shared.repository.CharactersRepositoryImpl
 import com.hynekbraun.rickandmorty.shared.repository.FavoriteCharactersRepository
 import com.hynekbraun.rickandmorty.shared.repository.FavoriteCharactersRepositoryImpl
-import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApi
-import com.hynekbraun.rickandmorty.shared.repository.api.CharactersApiImpl
+import com.hynekbraun.rickandmorty.shared.api.CharactersApi
+import com.hynekbraun.rickandmorty.shared.api.CharactersApiImpl
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
