@@ -20,6 +20,11 @@ internal class CharactersApiImpl(
     override suspend fun getCharactersByPage(url: String): Response<CharactersApiModel> =
         networkExecutor.get<CharactersApiModel>(url)
 
+    override suspend fun getCharactersByPageAndQuery(url: String?, query: String): Response<CharactersApiModel> {
+        val safeUrl = if (url == null) "$CHARACTERS_URL$NAME_FILTER$query" else "$CHARACTERS_URL$NAME_FILTER$query"
+        return networkExecutor.get<CharactersApiModel>(safeUrl)
+    }
+
     override suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel> =
         networkExecutor.get<CharacterDetailApiModel>("$BASE_URL$DELIMITER$id")
 }
@@ -27,3 +32,4 @@ internal class CharactersApiImpl(
 private const val DELIMITER: String = "/"
 private const val BASE_URL: String = "https://rickandmortyapi.com/api/character"
 private const val CHARACTERS_URL: String = "$BASE_URL?page=1"
+private const val NAME_FILTER: String = "&name="

@@ -12,4 +12,7 @@
     <string name="detail_gender">Gender</string>
     <string name="detail_origin">Origin</string>
     <string name="detail_location">Location</string>
+
+    <string name="search_prompt">Search characters</string>
+
 </resources>

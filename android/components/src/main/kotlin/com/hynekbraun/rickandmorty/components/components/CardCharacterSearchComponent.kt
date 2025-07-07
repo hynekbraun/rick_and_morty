@@ -1,6 +1,7 @@
 package com.hynekbraun.rickandmorty.components.components
 
 import android.content.res.Configuration
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,10 +27,13 @@ import com.hynekbraun.rickandmorty.shared.components.components.CardCharacterSea
 @Composable
 public fun CardCharacterSearchComponent(
     model: CardCharacterSearchComponentModel,
+    onClick: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
-        modifier = modifier.padding(8.dp),
+        modifier = modifier
+            .clickable(onClick = remember { { onClick(model.id) } })
+            .padding(8.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalAlignment = Alignment.Top,
     ) {
@@ -72,6 +77,7 @@ private fun CardCharacterSearchComponentPreview() = RMTheme {
 
         CardCharacterSearchComponent(
             modifier = Modifier,
+            onClick = {},
             model = CardCharacterSearchComponentModel(
                 photoUrl = "",
                 name = "Morty Smith",
@@ -81,6 +87,7 @@ private fun CardCharacterSearchComponentPreview() = RMTheme {
         )
         CardCharacterSearchComponent(
             modifier = Modifier,
+            onClick = {},
             model = CardCharacterSearchComponentModel(
                 photoUrl = "",
                 name = "Morty Smith Morty Smith Morty Smith Morty Smith Morty Smith",

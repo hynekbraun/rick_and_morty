@@ -10,7 +10,6 @@ import com.hynekbraun.rickandmorty.shared.repository.models.CharacterDetailModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharacterModel
 import com.hynekbraun.rickandmorty.shared.repository.models.CharactersListModel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 
@@ -40,8 +39,15 @@ internal class CharactersRepositoryImpl(
         }
 
     override suspend fun getCharactersByPage(page: String): Response<CharactersListModel> {
-        val favorites = favoritesDao.getAll().firstOrNull() ?: emptyList()
         return when (val response = api.getCharactersByPage(page)) {
+            is Response.Error<CharactersApiModel> -> return Response.Error(response.message)
+            is Response.Success<CharactersApiModel> -> Response.Success(response.data.toDomainModel(emptyList()))
+        }
+    }
+
+    override suspend fun getCharactersByPageAndQuery(page: String?, query: String): Response<CharactersListModel> {
+        val favorites = favoritesDao.getAll().firstOrNull() ?: emptyList()
+        return when (val response = api.getCharactersByPageAndQuery(page, query)) {
             is Response.Error<CharactersApiModel> -> return Response.Error(response.message)
             is Response.Success<CharactersApiModel> -> Response.Success(response.data.toDomainModel(favorites.map { it.id }))
         }

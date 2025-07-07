@@ -12,5 +12,7 @@ internal interface CharactersApi {
 
     suspend fun getCharactersByPage(url: String): Response<CharactersApiModel>
 
+    suspend fun getCharactersByPageAndQuery(url: String?, query: String): Response<CharactersApiModel>
+
     suspend fun getCharacterById(id: String): Response<CharacterDetailApiModel>
 }

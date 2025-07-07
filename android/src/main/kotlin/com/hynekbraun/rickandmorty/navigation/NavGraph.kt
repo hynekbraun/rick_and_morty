@@ -108,7 +108,12 @@ private fun NavGraphBuilder.search(
 ) {
     composable<Destinations.Search> { backStackEntry ->
         onBottomBarVisibilityChange(false)
-        SearchScreen()
+        SearchScreen(
+            navigateBack = remember { { navController.navigateUp() } },
+            navigateToCharacterDetail = { id ->
+                navController.navigate(Destinations.Detail(id))
+            },
+        )
     }
 }
 

@@ -3,12 +3,14 @@ package com.hynekbraun.rickandmorty.shared.di
 import com.hynekbraun.rickandmorty.shared.features.characterdetail.CharacterDetailViewModel
 import com.hynekbraun.rickandmorty.shared.features.characterslist.CharactersListViewModel
 import com.hynekbraun.rickandmorty.shared.features.favoriteslist.FavoritesListViewModel
+import com.hynekbraun.rickandmorty.shared.features.search.SearchViewModel
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
 internal actual val viewModelModule : Module = module {
     factory { CharactersListViewModel(get(), get()) }
     factory { FavoritesListViewModel(get(), get()) }
+    factory { SearchViewModel(get(), get()) }
     factory { (characterId: String) ->
         CharacterDetailViewModel(
             charactersRepository = get(),

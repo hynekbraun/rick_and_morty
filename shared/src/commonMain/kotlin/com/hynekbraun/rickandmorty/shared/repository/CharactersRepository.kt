@@ -13,5 +13,7 @@ public interface CharactersRepository {
 
     public suspend fun getCharactersByPage(page: String): Response<CharactersListModel>
 
+    public suspend fun getCharactersByPageAndQuery(page: String?, query: String): Response<CharactersListModel>
+
     public suspend fun getCharacterById(id: String): Response<CharacterDetailModel>
 }
