@@ -1,5 +1,6 @@
 package com.hynekbraun.rickandmorty.screens.search
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -26,7 +27,7 @@ internal fun SearchDataScreen(
 
         data.nextPage?.let {
             item {
-                NextPageComponent()
+                NextPageComponent(Modifier.fillMaxWidth())
                 loadNextPage()
             }
         }

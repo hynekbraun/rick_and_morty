@@ -23,12 +23,12 @@ internal class SearchComponentsFactoryImpl : SearchComponentsFactory {
         return if (hasNextPage) {
             SearchViewState.Data(
                 characters = characters,
-                nextPage = null,
+                nextPage = NextPageComponentModel,
             )
         } else {
             SearchViewState.Data(
                 characters = characters,
-                nextPage = NextPageComponentModel,
+                nextPage = null,
             )
         }
     }

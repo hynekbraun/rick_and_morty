@@ -36,14 +36,16 @@ public class SearchViewModel(
 
     private fun listenToQuery() {
         @OptIn(kotlinx.coroutines.FlowPreview::class)
-        queryState
+        _queryState
             .debounce(500L)
             .distinctUntilChanged()
             .onEach { query ->
                 if (query.isNotBlank() && query.length >= 2) {
+                    nextPage = null
                     search(query)
                 } else {
-                    Unit
+                    nextPage = null
+                    _state.emit(SearchViewState.Initial)
                 }
             }
             .launchIn(viewModelScope)
@@ -52,9 +54,11 @@ public class SearchViewModel(
     private suspend fun search(query: String) {
         val characters = charactersRepository.getCharactersByPageAndQuery(page = nextPage, query = query)
         val newState = characters.toState(componentFactory)
+
         (characters as? Response.Success<CharactersListModel>)?.let {
             nextPage = it.data.nextPage
         }
+
         _state.emit(newState)
     }
 
@@ -63,27 +67,29 @@ public class SearchViewModel(
     }
 
     public fun clearQuery() {
-        _queryState.value = ""
-        _state.value = SearchViewState.Initial
         nextPage = null
+        _queryState.value = ""
+        _state.value = (SearchViewState.Initial)
     }
-
 
     public fun getNextPage() {
         viewModelScope.launch {
-            nextPage?.let {
-                val characters = charactersRepository.getCharactersByPage(it)
+            nextPage?.let { page ->
+                val currentQuery = _queryState.value
+                val characters = charactersRepository.getCharactersByPageAndQuery(page = page, query = currentQuery)
                 val newState = characters.toState(componentFactory)
+
                 (characters as? Response.Success<CharactersListModel>)?.let {
                     nextPage = it.data.nextPage
                 }
+
                 (state.value as? SearchViewState.Data)?.let { safeState ->
                     (newState as? SearchViewState.Data)?.let { safeNewData ->
                         _state.emit(
                             safeState.copy(
                                 characters = safeState.characters.plus(safeNewData.characters),
-                                nextPage = safeNewData.nextPage
-                            )
+                                nextPage = safeNewData.nextPage,
+                            ),
                         )
                     }
                 } ?: _state.emit(newState)
