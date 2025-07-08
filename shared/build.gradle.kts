@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.room.plugin)
     alias(libs.plugins.testing.mokkery)
+    alias(libs.plugins.skie)
 }
 
 kotlin {
@@ -24,9 +25,10 @@ kotlin {
         iosTarget.binaries.framework {
             baseName = "Shared"
             isStatic = true
+            linkerOpts.add("-lsqlite3")
             export(libs.androidx.lifecycle.viewmodel)
 
-            export(projects.shared)
+            export(projects.shared.components)
         }
     }
 
@@ -58,6 +60,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.ktor.client.darwin)
             api(libs.androidx.lifecycle.viewmodel)
+            api(projects.shared.components)
         }
     }
     explicitApi()
@@ -77,6 +80,12 @@ android {
 
 room {
     schemaDirectory("$projectDir/schemas")
+}
+
+skie {
+    features {
+        enableSwiftUIObservingPreview = true
+    }
 }
 
 dependencies {

@@ -27,6 +27,7 @@ internal class CharactersRepositoryImpl(
 
     override suspend fun getFavoriteCharacters(): Flow<Response<List<CharacterModel>>> =
         favoritesDao.getAll().map { favorites ->
+            if (favorites.isEmpty()) return@map Response.Success<List<CharacterModel>>(emptyList())
             when (val response = api.getCharactersByIds(favorites.map { it.id })) {
                 is Response.Error<List<CharactersApiModel.Results>> -> Response.Error(response.message)
                 is Response.Success<List<CharactersApiModel.Results>> -> {
