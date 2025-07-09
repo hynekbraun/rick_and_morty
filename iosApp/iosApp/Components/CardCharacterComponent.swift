@@ -11,7 +11,7 @@ struct CardCharacterComponent: View {
 					.resizable()
 					.aspectRatio(contentMode: .fill)
 			} placeholder: {
-				Image(systemName: "tap_bar_character")
+				Image(.tapBarCharacters)
 					.foregroundColor(.foregroundPrimary)
 					.font(.system(size: 20))
 			}
@@ -27,7 +27,7 @@ struct CardCharacterComponent: View {
 						.truncationMode(.tail)
 						
 					if model.showStar {
-						Image(systemName: "star.fill")
+						Image(.favoriteFull)
 							.foregroundColor(.accentPrimary)
 							.font(.system(size: 16))
 					}

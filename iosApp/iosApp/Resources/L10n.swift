@@ -10,5 +10,8 @@ enum L10n {
 	static let status = NSLocalizedString("status", comment: "")
 	static let type = NSLocalizedString("type", comment: "")
 	
+	static let searchPrompt = NSLocalizedString("searchPrompt", comment: "")
+	
 	static let favorites = NSLocalizedString("favorites", comment: "")
+	static let characters = NSLocalizedString("characters", comment: "")
 }

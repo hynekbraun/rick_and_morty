@@ -5,13 +5,13 @@ struct ContentView: View {
     
 	var body: some View {
 		TabView {
-			Tab("Characters", image: "tap_bar_characters") {
+			Tab(L10n.characters, image: "tap_bar_characters") {
 				NavigationStack {
 					CharactersList()
 				}
 			}
 
-			Tab("Favorites", image: "tap_bar_favorites") {
+			Tab(L10n.favorites, image: "tap_bar_favorites") {
 				NavigationStack {
 					FavoriteCharacters()
 				}

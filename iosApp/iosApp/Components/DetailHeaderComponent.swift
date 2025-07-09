@@ -13,7 +13,7 @@ struct DetailHeaderComponent: View {
 						.resizable()
 						.aspectRatio(contentMode: .fill)
 				} placeholder: {
-					Image("tap_bar_character")
+					Image(.tapBarCharacters)
 						.resizable()
 						.aspectRatio(contentMode: .fill)
 				}

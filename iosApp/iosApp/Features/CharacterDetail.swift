@@ -44,13 +44,13 @@ struct CharacterDetail: View {
 				}
 			}
 		}
-		.navigationBarHidden(true) // Move this to the main body
+		.navigationBarHidden(true)
 	}
 	
 	@ViewBuilder
 	private func content(model: CharacterDetailViewState.Data) -> some View {
 		ScrollView {
-			LazyVStack(alignment: .leading, spacing: 16) { // Add alignment: .leading
+			LazyVStack(alignment: .leading, spacing: 16) {
 				DetailHeaderComponent(model: model.header)
 				
 				ForEach(model.info, id: \.title) { infoItem in

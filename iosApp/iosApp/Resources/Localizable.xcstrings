@@ -1,11 +1,29 @@
 {
   "sourceLanguage" : "en",
   "strings" : {
-    "Characters" : {
+    "characters" : {
 
     },
+    "Characters" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "characters"
+          }
+        }
+      }
+    },
     "favorites" : {
-      "extractionState" : "manual"
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "favorites"
+          }
+        }
+      }
     },
     "Favorites" : {
       "localizations" : {
@@ -61,6 +79,20 @@
         }
       }
     },
+    "searchprompt" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search Characters"
+          }
+        }
+      }
+    },
+    "searchPrompt" : {
+
+    },
     "species" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -71,6 +103,9 @@
           }
         }
       }
+    },
+    "Start typing to search..." : {
+
     },
     "status" : {
       "extractionState" : "manual",
