@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.paparazzi)
 }
 
 android {
@@ -37,5 +38,9 @@ dependencies {
     implementation(libs.bundles.coil)
 
     implementation(projects.shared.components)
+
+    testImplementation(libs.junit)
+    testImplementation(libs.paparazzi)
+
 
 }

@@ -24,6 +24,7 @@ testing-mokkery = "2.9.0"
 kotlinx-coroutines = "1.10.2"
 turbine = "1.2.1"
 skie = "0.10.4"
+paparazzi-version = "1.3.5"
 
 
 [libraries]
@@ -67,6 +68,8 @@ room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 testing-kotlin = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 testing-kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 testing-turbine = { module = "app.cash.turbine:turbine", version.ref = "turbine" }
+paparazzi = { module = "app.cash.paparazzi:paparazzi-gradle-plugin", version.ref = "paparazzi-version"}
+junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
@@ -79,6 +82,7 @@ room-plugin = { id = "androidx.room", version.ref = "room" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 testing-mokkery = { id = "dev.mokkery", version.ref = "testing-mokkery" }
 skie = { id = "co.touchlab.skie", version.ref = "skie" }
+paparazzi = { id = "app.cash.paparazzi", version.ref = "paparazzi-version" }
 
 [bundles]
 compose-default = ["compose-ui", "compose-material3", "compose-tooling","compose-tooling-preview"]
