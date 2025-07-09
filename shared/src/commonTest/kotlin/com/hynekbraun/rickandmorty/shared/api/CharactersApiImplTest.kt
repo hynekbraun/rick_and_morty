@@ -2,7 +2,6 @@ package com.hynekbraun.rickandmorty.shared.api
 
 import com.hynekbraun.rickandmorty.shared.network.NetworkExecutor
 import com.hynekbraun.rickandmorty.shared.network.Response
-import com.hynekbraun.rickandmorty.shared.api.CharactersApiImpl
 import com.hynekbraun.rickandmorty.shared.api.models.CharacterDetailApiModel
 import com.hynekbraun.rickandmorty.shared.api.models.CharactersApiModel
 import dev.mokkery.answering.returns
@@ -71,7 +70,7 @@ internal class CharactersApiImplTest {
     @Test
     fun `getCharactersByIds returns success response`() = runTest {
         val ids = listOf("1")
-        val url = "${CharactersApiImpl.BASE_URL}${CharactersApiImpl.DELIMITER}${ids.joinToString()}"
+        val url = "${CharactersApiImpl.BASE_URL}${CharactersApiImpl.DELIMITER}[${ids.joinToString()}]"
 
         everySuspend {
             networkExecutorMock.getList(url, CharactersApiModel.Results::class)
@@ -86,7 +85,7 @@ internal class CharactersApiImplTest {
     @Test
     fun `getCharactersByIds returns error response`() = runTest {
         val ids = listOf("1")
-        val url = "${CharactersApiImpl.BASE_URL}${CharactersApiImpl.DELIMITER}${ids.joinToString()}"
+        val url = "${CharactersApiImpl.BASE_URL}${CharactersApiImpl.DELIMITER}[${ids.joinToString()}]"
 
         everySuspend {
             networkExecutorMock.getList(url, CharactersApiModel.Results::class)

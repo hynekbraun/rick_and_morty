@@ -14,7 +14,7 @@ internal class CharactersApiImpl(
         networkExecutor.get<CharactersApiModel>(CHARACTERS_URL)
 
     override suspend fun getCharactersByIds(ids: List<String>): Response<List<CharactersApiModel.Results>> {
-        return networkExecutor.getList<CharactersApiModel.Results>("$BASE_URL$DELIMITER${ids.joinToString()}")
+        return networkExecutor.getList<CharactersApiModel.Results>("$BASE_URL$DELIMITER[${ids.joinToString()}]")
     }
 
     override suspend fun getCharactersByPage(url: String): Response<CharactersApiModel> =

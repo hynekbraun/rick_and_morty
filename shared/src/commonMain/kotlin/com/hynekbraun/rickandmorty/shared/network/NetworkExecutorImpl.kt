@@ -48,6 +48,7 @@ internal class NetworkExecutorImpl : NetworkExecutor {
 
     @OptIn(InternalSerializationApi::class)
     override suspend fun <T : Any> getList(url: String, clazz: KClass<T>): Response<List<T>> {
+
         val response = try {
             httpClient.get(url)
         } catch (e: Exception) {
