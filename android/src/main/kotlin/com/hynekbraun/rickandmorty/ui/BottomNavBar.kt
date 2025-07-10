@@ -1,5 +1,6 @@
 package com.hynekbraun.rickandmorty.ui
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,6 +20,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.hynekbraun.rickandmorty.R
 import com.hynekbraun.rickandmorty.components.components.NavBarItemComponent
+import com.hynekbraun.rickandmorty.components.theme.RMTheme
 import com.hynekbraun.rickandmorty.shared.components.components.NavBarItemComponentModel
 import com.hynekbraun.rickandmorty.shared.navigation.Destinations
 
@@ -28,7 +30,10 @@ internal fun BottomNavBar(
     modifier: Modifier = Modifier,
 ) {
     NavigationBar(
-        modifier = modifier.clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp)),
+        modifier = modifier
+            .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
+        ,
+        containerColor = RMTheme.colors.backgroundsBottomNavigation,
         tonalElevation = 2.dp,
     ) {
         val navBackStackEntry: NavBackStackEntry? by navController.currentBackStackEntryAsState()
