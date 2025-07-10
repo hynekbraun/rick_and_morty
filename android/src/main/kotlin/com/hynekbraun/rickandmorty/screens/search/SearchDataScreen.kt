@@ -20,6 +20,7 @@ internal fun SearchDataScreen(
     LazyColumn(modifier = modifier) {
         items(items = data.characters, key = { it.id }) {
             CardCharacterSearchComponent(
+                modifier = Modifier.fillMaxWidth(),
                 model = it,
                 onClick = onCardClick,
             )

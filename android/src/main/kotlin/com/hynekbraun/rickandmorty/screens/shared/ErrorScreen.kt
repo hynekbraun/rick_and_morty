@@ -23,5 +23,4 @@ internal fun ErrorScreen(
             text = "We don't make mistakes, we just make a happy little accidents."
         )
     }
-
 }

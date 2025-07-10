@@ -12,14 +12,6 @@ public class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
-        setContent {
-            App()
-        }
+        setContent { App() }
     }
-}
-
-@Preview
-@Composable
-private fun AppAndroidPreview() {
-    App()
 }

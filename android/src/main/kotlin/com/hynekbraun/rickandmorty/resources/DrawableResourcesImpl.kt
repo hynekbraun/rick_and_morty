@@ -12,5 +12,4 @@ internal class DrawableResourcesImpl(private val context: Context): DrawableReso
         get() = R.drawable.favorites_empty
     override val actionBarBackChevron: DrawableRes
         get() = R.drawable.chevron_back
-
 }

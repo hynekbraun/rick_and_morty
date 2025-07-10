@@ -96,4 +96,3 @@ private fun Response<CharacterDetailModel>.toState(
         is Response.Success<CharacterDetailModel> -> componentFactory.create(this.data)
     }
 }
-

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavController
@@ -59,15 +60,16 @@ internal fun BottomNavBar(
 
 @Composable
 private fun navBarItems(): List<NavBarItemComponentModel> {
+    val context = LocalContext.current
     return listOf(
         NavBarItemComponentModel(
-            description = "Characters",
+            description = context.getString(R.string.navigation_bar_characters),
             icon = R.drawable.maintab_characters,
             active = true,
             route = Destinations.Maintab.Characters,
         ),
         NavBarItemComponentModel(
-            description = "Favorites",
+            description = context.getString(R.string.navigation_bar_characters),
             icon = R.drawable.maintab_favorites,
             active = false,
             route = Destinations.Maintab.Favorites,

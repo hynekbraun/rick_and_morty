@@ -4,6 +4,9 @@
     <string name="characters_list_action_bar_title">Characters</string>
     <string name="favorites_title">Favorites</string>
 
+    <string name="navigation_bar_characters">Characters</string>
+    <string name="navigation_bar_favorites">Favorites</string>
+
 
     <string name="detail_name">Name</string>
     <string name="detail_status">Status</string>
