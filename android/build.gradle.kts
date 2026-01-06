@@ -50,7 +50,9 @@ dependencies {
     implementation(libs.compose.material.icons)
     implementation(libs.koin.compose)
     implementation(libs.koin.android)
-    implementation(libs.navigation.compose)
+    implementation(libs.android.navigation.runtime)
+    implementation(libs.android.navigation.ui)
+    implementation(libs.android.navigation.viewmodel)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.compose.default)

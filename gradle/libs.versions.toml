@@ -1,12 +1,13 @@
 [versions]
-agp = "8.7.3"
-android-compileSdk = "35"
+agp = "8.13.1"
+android-compileSdk = "36"
 android-minSdk = "24"
-android-targetSdk = "35"
+android-targetSdk = "36"
 androidx-activity = "1.10.1"
 androidx-appcompat = "1.7.1"
 androidx-core = "1.16.0"
 androidx-lifecycle = "2.9.0"
+android-navigation = "1.1.0-alpha01"
 coil = "3.2.0"
 compose-bom = "2025.06.01"
 junit = "4.13.2"
@@ -36,6 +37,9 @@ androidx-lifecycle-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmode
 #Android
 coil = { group = "io.coil-kt.coil3",name = "coil", version.ref = "coil" }
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koin" }
+android-navigation-runtime = { group = "androidx.navigation3", name = "navigation3-runtime", version.ref = "android-navigation" }
+android-navigation-ui = { group = "androidx.navigation3", name = "navigation3-ui", version.ref = "android-navigation" }
+android-navigation-viewmodel = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-navigation3", version.ref = "android-navigation" }
 
 #Compose
 androidx-compose-runtime = { module = "androidx.compose.runtime:runtime"}

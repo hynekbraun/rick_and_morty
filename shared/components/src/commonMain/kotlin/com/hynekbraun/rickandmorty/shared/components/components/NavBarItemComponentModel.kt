@@ -8,5 +8,4 @@ public data class NavBarItemComponentModel(
     val description: String,
     val icon: DrawableRes,
     val active: Boolean,
-    val route: Any,
 )

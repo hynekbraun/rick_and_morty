@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.core)
             implementation(libs.ktor.client.okhttp)
+            implementation(libs.android.navigation.runtime)
         }
 
         iosMain.dependencies {

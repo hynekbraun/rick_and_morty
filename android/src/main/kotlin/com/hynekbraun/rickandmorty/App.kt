@@ -10,19 +10,25 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.compose.rememberNavController
 import com.hynekbraun.rickandmorty.components.theme.RMTheme
-import com.hynekbraun.rickandmorty.navigation.NavGraph
+import com.hynekbraun.rickandmorty.navigation.NavigationRoot
+import com.hynekbraun.rickandmorty.navigation.Navigator
+import com.hynekbraun.rickandmorty.navigation.rememberNavigationState
+import com.hynekbraun.rickandmorty.shared.navigation.Destinations
 import com.hynekbraun.rickandmorty.ui.BottomNavBar
+import com.hynekbraun.rickandmorty.ui.TOP_LEVEL_DESTINATIONS
 
 @Composable
 @Preview
 internal fun App() {
     RMTheme {
-        val navController = rememberNavController()
-
         var bottomBarVisibility by remember { mutableStateOf(true) }
 
+        val navigationState  = rememberNavigationState(
+            startRoute = Destinations.CharactersTab,
+            topLevelRoutes = TOP_LEVEL_DESTINATIONS,
+        )
+        val navigator = remember { Navigator(navigationState) }
         Scaffold(
             containerColor = RMTheme.colors.backgroundsPrimary,
             modifier = Modifier.fillMaxSize(),
@@ -30,16 +36,19 @@ internal fun App() {
                 AnimatedVisibility(
                     visible = bottomBarVisibility, enter = fadeIn(tween(200)), exit = fadeOut(tween(200))
                 ) {
-                    BottomNavBar(navController)
+                    BottomNavBar(
+                        currentSelectedKey = navigationState.topLevelRoute,
+                        onSelectKey = navigator::navigate
+                    )
                 }
             }
         ) { padding ->
-            NavGraph(
-                navController = navController,
+            NavigationRoot(
+                navigator = navigator,
+                navigationState = navigationState,
+                onBottomBarVisibilityChange = { bottomBarVisibility = it },
                 modifier = Modifier.padding(padding)
-            ) { bottomBarVisible ->
-                bottomBarVisibility = bottomBarVisible
-            }
+            )
         }
     }
 }
