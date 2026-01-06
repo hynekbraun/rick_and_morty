@@ -16,4 +16,7 @@ public sealed class Destinations : KmpNavKey {
 
     @Serializable
     public data object Search : Destinations()
+
+    @Serializable
+    public data class PictureDialog(public val photoUrl: String) : Destinations()
 }

@@ -17,6 +17,7 @@ import com.hynekbraun.rickandmorty.shared.features.favoriteslist.FavoritesListVi
 internal fun FavoritesListDataScreen(
     data: FavoritesListViewState.Data,
     onCharacterClick: (String) -> Unit,
+    onCharacterHold: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -31,6 +32,7 @@ internal fun FavoritesListDataScreen(
                 modifier = Modifier.fillMaxWidth(),
                 model = it,
                 onClick = onCharacterClick,
+                onHold = onCharacterHold,
             )
         }
     }

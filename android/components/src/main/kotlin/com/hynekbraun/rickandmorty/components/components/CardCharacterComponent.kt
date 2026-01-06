@@ -3,6 +3,7 @@ package com.hynekbraun.rickandmorty.components.components
 import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,12 +32,16 @@ import com.hynekbraun.rickandmorty.shared.components.components.CardCharacterCom
 public fun CardCharacterComponent(
     model: CardCharacterComponentModel,
     onClick: (String) -> Unit,
+    onHold: (String) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp))
-            .clickable(onClick = remember { { onClick(model.id) } }),
+            .combinedClickable(
+                onClick = remember { { onClick(model.id) } },
+                onLongClick = remember { { onHold(model.photoUrl) } },
+                ),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = RMTheme.colors.backgroundsTertiary),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
@@ -107,6 +112,7 @@ private fun CardCharacterComponentPreview() = RMTheme {
                 id = "5",
             ),
             onClick = {},
+            onHold = {},
         )
         CardCharacterComponent(
             modifier = Modifier.fillMaxWidth(),
@@ -118,6 +124,7 @@ private fun CardCharacterComponentPreview() = RMTheme {
                 id = "5",
             ),
             onClick = {},
+            onHold = {},
         )
     }
 }

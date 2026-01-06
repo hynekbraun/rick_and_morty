@@ -18,6 +18,7 @@ import com.hynekbraun.rickandmorty.shared.features.characterslist.CharactersList
 internal fun CharacterListDataScreen(
     data: CharactersListViewState.Data,
     onCharacterClick: (String) -> Unit,
+    onCharacterHold: (String) -> Unit,
     loadNextPage: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -34,6 +35,7 @@ internal fun CharacterListDataScreen(
                 modifier = Modifier.fillMaxWidth(),
                 model = it,
                 onClick = onCharacterClick,
+                onHold = onCharacterHold,
             )
         }
         data.nextPage?.let {

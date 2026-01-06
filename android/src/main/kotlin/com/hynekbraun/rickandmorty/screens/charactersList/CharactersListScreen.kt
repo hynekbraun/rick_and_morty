@@ -18,6 +18,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 internal fun CharactersListScreen(
     navigateToDetail: (String) -> Unit,
+    navigateToPictureDialog: (String) -> Unit,
     navigateToSearch: () -> Unit,
     viewModel: CharactersListViewModel = koinViewModel(),
 ) {
@@ -38,6 +39,7 @@ internal fun CharactersListScreen(
             is CharactersListViewState.Data -> CharacterListDataScreen(
                 data = viewState as CharactersListViewState.Data,
                 onCharacterClick = navigateToDetail,
+                onCharacterHold = navigateToPictureDialog,
                 loadNextPage = viewModel::getNextPage,
             )
 
